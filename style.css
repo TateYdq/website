@@ -1,0 +1,12 @@
+body {
+	font-family: 'Ek Mukta', sans-serif;color: #666;
+	background-color: #fff;
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight:400;
+	background:url(img_weather_background.jpg) no-repeat ;
+	background-size: cover;
+  	-webkit-background-size: cover;
+  	-o-background-size: cover;
+  	text-align:center;
+}
