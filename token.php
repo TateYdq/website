@@ -74,7 +74,7 @@
 	            $str = mb_substr($keyword,-2,2,"UTF-8");
 	            $str_key = mb_substr($keyword,0,-2,"UTF-8");
 	            if($str == '天气' && !empty($str_key)){
-                    $contentStr  = "天气预报\n当前温度:1度\n当前风力：3级\n天气：雾";
+                    $contentStr  = $this->getWeather($str_key);
             
 	            } else {
 	                $contentStr = "";
@@ -86,7 +86,8 @@
 	            echo "Input something...";
 	        }
 	    }
-
+	
+      
 	    public function handleEvent($object)
 	    {
 	        $contentStr = "";
@@ -103,6 +104,19 @@
 	        return $resultStr;
 	    }
 	    
+	    public function getWeather($city){
+          $url = "http://192.144.143.57/city/".$city;
+          $res = file_get_contents($url); 
+      	  $data = json_decode($res,true);
+          if($data){
+          	$code = $data["city_code"];
+            $url_city = "http://192.144.143.57/weather/".$code;
+            $res = file_get_contents($url_city);
+            return $res;
+			$data = json_decode($res,true);
+          }
+          return $data;
+        }
 	    public function responseText($object, $content, $flag=0)
 	    {
 	        $textTpl = "<xml>
